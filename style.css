@@ -13,6 +13,10 @@
     margin: 0;
     padding: 0;
 }
+html {
+    overflow-x: hidden;
+    width: 100%;
+}
 
 body {
     font-family: 'Arial', sans-serif;
@@ -21,6 +25,7 @@ body {
     background-color: var(--background-color);
     scroll-behavior: smooth;
     overflow-x: hidden;
+    width: 100%; /* 確保 width 填滿 */
 }
 
 a {
@@ -428,6 +433,7 @@ h1, h2, h3 {
     gap: 25px;
 }
 
+/* Subsystems Card 修正版 */
 .subsystem-card {
     display: flex;
     align-items: center;
@@ -439,8 +445,17 @@ h1, h2, h3 {
     background-color: var(--light-bg);
     width: min(100%, 1000px);
     margin: 0 auto;
+    
+    /* 動畫初始狀態：向下偏移 30px，避免 X 軸水平溢出破頁 */
     opacity: 0;
-    transition: all 1s ease-out;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* 當 JS 加上 visible 時觸發淡入 */
+.subsystem-card.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .subsystem-card.left-slide { transform: translateX(-100%) !important; }
