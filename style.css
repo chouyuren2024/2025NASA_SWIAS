@@ -20,6 +20,7 @@ body {
     color: var(--text-color);
     background-color: var(--background-color);
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 a {
@@ -130,14 +131,14 @@ h1, h2, h3 {
     background-color: #e0f2f1;
     background-size: cover;
     background-position: center;
-    height: 80vh;
+    min-height: min(80vh, 760px);
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: white;
     position: relative;
-    padding: 0 5%;
+    padding: clamp(80px, 10vw, 140px) 5%;
 }
 
 .hero-section::before {
@@ -153,17 +154,17 @@ h1, h2, h3 {
 .hero-content {
     position: relative;
     z-index: 10;
-    max-width: 800px;
+    width: min(100%, 800px);
 }
 
 .hero-content h1 {
-    font-size: 3.0em;
+    font-size: clamp(2rem, 5vw, 3rem);
     color: white;
     margin-bottom: 20px;
 }
 
 .hero-content p {
-    font-size: 1.2em;
+    font-size: clamp(1rem, 2vw, 1.2rem);
     margin-bottom: 30px;
     color: #eee;
 }
@@ -176,6 +177,7 @@ h1, h2, h3 {
 .stats-section {
     display: flex;
     justify-content: space-around;
+    gap: 30px;
     padding: 50px 5%;
     background-color: var(--light-bg);
     border-bottom: 1px solid #e0e0e0;
@@ -183,33 +185,39 @@ h1, h2, h3 {
 
 .stat-card {
     text-align: center;
+    flex: 1 1 0;
+    min-width: 0;
 }
 
 .stat-card h2 {
-    font-size: 3em;
+    font-size: clamp(1.8rem, 5vw, 3rem);
     color: var(--secondary-color);
 }
 
 .stat-card p {
-    font-size: 1.1em;
-    color: var(--text-color);
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
 }
 
 /* Features Section */
 .features-section {
-    padding: 80px 5%;
+    padding: clamp(50px, 8vw, 80px) 5%;
     text-align: center;
 }
 
+.features-section h2,
+.pricing-section h2,
+.subsystems-section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
 .features-section h2 {
-	font-size: 2.5em; /* 調整為 Subsystems 的大小 */
     margin-bottom: 40px;
-    color: var(--primary-color)
+    color: var(--primary-color);
 }
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
     gap: 30px;
 }
 
@@ -218,8 +226,9 @@ h1, h2, h3 {
     border-radius: 8px;
     box-shadow: var(--card-shadow);
     text-align: left;
-	display: flex;
+    display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .feature-item i {
@@ -234,20 +243,19 @@ h1, h2, h3 {
 
 /* Pricing Section */
 .pricing-section {
-    padding: 80px 5%;
+    padding: clamp(50px, 8vw, 80px) 5%;
     background-color: var(--light-bg);
     text-align: center;
 }
 
 .pricing-section h2 {
-    font-size: 2.5em; /* 調整為 Subsystems 的大小 */
     margin-bottom: 40px;
     color: var(--primary-color);
 }
 
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 30px;
     max-width: 1000px;
     margin: 0 auto;
@@ -257,19 +265,13 @@ h1, h2, h3 {
     background-color: white;
     padding: 30px;
     border-radius: 8px;
-    border: 2px solid #ddd; 
+    border: 2px solid #ddd;
     box-shadow: var(--card-shadow);
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-	display: flex;
+    display: flex;
     flex-direction: column;
-}
-.btn-upgrade {
-    width: 100%;
-    margin-top: auto; 
-    background-color: var(--secondary-color);
-    color: white;
-    border: none;
+    min-width: 0;
 }
 
 .pricing-card h3,
@@ -279,7 +281,7 @@ h1, h2, h3 {
 }
 
 .pricing-card.recommended {
-    border-color: #ddd; 
+    border-color: #ddd;
     transform: none;
     box-shadow: var(--card-shadow);
 }
@@ -291,7 +293,7 @@ h1, h2, h3 {
 }
 
 .price {
-    font-size: 2.5em;
+    font-size: clamp(2rem, 5vw, 2.5rem);
     font-weight: bold;
     color: #202124;
     margin-bottom: 20px;
@@ -305,8 +307,7 @@ h1, h2, h3 {
 
 .pricing-card ul {
     text-align: left;
-    margin-bottom: 20px;
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .pricing-card ul li {
@@ -365,185 +366,98 @@ h1, h2, h3 {
     color: #ccc;
 }
 
-
-/* Responsive Design */
-@media (max-width: 900px) {
-    .hero-content h1 {
-        font-size: 2.5em;
-    }
-
-    .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-        text-align: center;
-    }
-    
-    .footer-logo {
-        grid-column: 1 / -1;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    /* Navigation */
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        background-color: var(--background-color);
-        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-        padding: 10px 0;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-links a {
-        margin: 10px 5%;
-        padding: 10px 0;
-        border-bottom: 1px solid #eee;
-    }
-
-    .cta-login {
-        margin: 10px 5%;
-        border: none;
-        padding: 0;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-
-    /* Stats Section */
-    .stats-section {
-        flex-direction: column;
-    }
-
-    .stat-card {
-        margin: 15px 0;
-    }
-
-    /* Footer */
-    .footer-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-}
-
-/*  LOGO  */
+/* Logo */
 .header-logo-img {
-    height: 40px; 
+    height: 40px;
     width: auto;
-    vertical-align: middle; 
+    vertical-align: middle;
 }
 
 .logo {
-    font-size: 1em; 
-    font-weight: bold;
-    color: var(--primary-color);
+    font-size: 1em;
     display: flex;
-    align-items: center; 
+    align-items: center;
+    flex-shrink: 0;
 }
 
+/* Scroll animations */
 .feature-item,
 .pricing-card,
-.stat-card { /* <--- **新增 .stat-card 到此處**，讓它使用通用的淡入動畫 */
-    /* 初始狀態：完全透明 */
+.stat-card {
     opacity: 0;
-    /* 輕微向上移動，增加淡入時的動感 */
-    transform: translateY(20px); 
-    /* 設定動畫效果 */
+    transform: translateY(20px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* 滾動時觸發的類別：使其完全顯示 */
 .feature-item.fade-in,
 .pricing-card.fade-in,
-.stat-card.fade-in { /* <--- **新增 .stat-card.fade-in** */
+.stat-card.fade-in {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* 價格卡片淡入動畫的延遲設定，使它們依序出現 */
 .pricing-card:nth-child(1) { transition-delay: 0s; }
 .pricing-card:nth-child(2) { transition-delay: 0.2s; }
 .pricing-card:nth-child(3) { transition-delay: 0.4s; }
-
-/* Feature 卡片淡入動畫的延遲設定 */
 .features-grid .feature-item:nth-child(1) { transition-delay: 0s; }
 .features-grid .feature-item:nth-child(2) { transition-delay: 0.15s; }
 .features-grid .feature-item:nth-child(3) { transition-delay: 0.3s; }
 .features-grid .feature-item:nth-child(4) { transition-delay: 0.45s; }
 
-
 /* Subsystems Section */
 .subsystems-section {
-    padding: 80px 5%;
+    padding: clamp(50px, 8vw, 80px) 5%;
     background-color: var(--background-color);
     text-align: center;
 }
 
 .subsystems-section h2 {
-    font-size: 2.5em;
     margin-bottom: 10px;
     color: var(--primary-color);
 }
 
 .section-description {
-    font-size: 1.1em;
-    color: var(--text-color);
-    margin-bottom: 60px;
+    max-width: 850px;
+    margin: 0 auto 60px;
+    font-size: clamp(1rem, 2vw, 1.1rem);
 }
 
 .subsystems-grid {
     display: flex;
     flex-direction: column;
-    gap: 25px; /* Spacing between the full-width cards */
+    gap: 25px;
 }
 
 .subsystem-card {
     display: flex;
     align-items: center;
+    gap: 30px;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
     text-align: left;
     background-color: var(--light-bg);
-    max-width: 1000px; /* 限制最大寬度，避免在超大螢幕上過寬 */
-    margin: 0 auto; /* 置中 */
-    /* 初始狀態: 準備動畫，透明度為0，並偏移到視窗外 */
+    width: min(100%, 1000px);
+    margin: 0 auto;
     opacity: 0;
-    transition: all 1s ease-out; /* 動畫時長和類型 */
+    transition: all 1s ease-out;
 }
 
-.subsystem-card.left-slide {
-    transform: translateX(-100%) !important; /* 強制鎖定左側初始位置 */
-}
-
-.subsystem-card.right-slide {
-    transform: translateX(100%) !important; /* 強制鎖定右側初始位置 */
-}
-
-/* 最終顯示狀態: 激活時，透明度為1，位移歸零 */
+.subsystem-card.left-slide { transform: translateX(-100%) !important; }
+.subsystem-card.right-slide { transform: translateX(100%) !important; }
 .subsystem-card.visible {
-    opacity: 1 !important; /* 確保透明度正確 */
-    transform: translateX(0) !important; /* 滑入中心 (最終修正版: 使用 !important 確保歸位) */
+    opacity: 1 !important;
+    transform: translateX(0) !important;
 }
 
-/* 內容排版 */
 .subsystem-card i {
+    flex: 0 0 40px;
     font-size: 3em;
     color: var(--secondary-color);
-    margin-right: 30px;
-    min-width: 40px; 
 }
 
 .subsystem-card h3 {
-    font-size: 1.3em;
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
     margin-bottom: 5px;
     color: #202124;
 }
@@ -553,14 +467,71 @@ h1, h2, h3 {
     color: #5f6368;
 }
 
-/* 響應式調整 */
+/* Responsive navigation and layouts */
+@media (max-width: 900px) {
+    .nav-links a { margin-left: 14px; }
+    .hero-content h1 { font-size: clamp(2rem, 6vw, 2.5rem); }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); text-align: center; }
+    .footer-logo { grid-column: 1 / -1; margin-bottom: 20px; }
+}
+
+@media (max-width: 768px) {
+    .main-header { padding: 10px 5%; }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: var(--background-color);
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+    }
+
+    .nav-links.active { display: flex; }
+    .nav-links a {
+        margin: 0 5%;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .menu-toggle { display: block; }
+    .stats-section { flex-direction: column; gap: 0; }
+    .stat-card { margin: 15px 0; }
+    .footer-grid { grid-template-columns: 1fr; text-align: center; }
+
+    .subsystem-card {
+        align-items: flex-start;
+        gap: 20px;
+        padding: 22px;
+    }
+    .subsystem-card i { flex-basis: 32px; font-size: 2.2em; }
+}
+
 @media (max-width: 600px) {
+    .hero-section { min-height: 70vh; padding: 70px 6%; }
+    .features-section,
+    .pricing-section,
+    .subsystems-section { padding-left: 6%; padding-right: 6%; }
+    .btn { max-width: 100%; padding: 11px 18px; }
+    .cta-buttons > * { margin: 6px 2px; }
     .subsystem-card {
         flex-direction: column;
+        align-items: center;
         text-align: center;
         padding: 20px;
     }
-    .subsystem-card i {
-        margin: 0 0 15px 0;
+    .subsystem-card i { margin: 0 0 5px; }
+    .section-description { margin-bottom: 35px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
     }
 }
